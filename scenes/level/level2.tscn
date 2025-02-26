@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvhcayx88t8by"]
+[gd_scene load_steps=10 format=3 uid="uid://drwgr2bnki568"]
 
-[ext_resource type="Script" path="res://scenes/level/landing_pad.gd" id="1_ah44r"]
-[ext_resource type="PackedScene" uid="uid://d08b7xlee8xtd" path="res://scenes/player/player.tscn" id="1_j32y2"]
+[ext_resource type="Script" path="res://scenes/level/landing_pad.gd" id="1_gmskn"]
+[ext_resource type="PackedScene" uid="uid://d08b7xlee8xtd" path="res://scenes/player/player.tscn" id="2_v5sn8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ldugo"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,6 +18,9 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dff28"]
 albedo_color = Color(0.4, 0.270588, 0.176471, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghmcp"]
+albedo_color = Color(0.988633, 0.830693, 0.87199, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djncm"]
 albedo_color = Color(0.121569, 0.133333, 1, 1)
@@ -40,6 +43,12 @@ use_collision = true
 size = Vector3(30, 8, 5)
 material = SubResource("StandardMaterial3D_dff28")
 
+[node name="Obstacle" type="CSGBox3D" parent="." groups=["Hazard"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60385, 0)
+use_collision = true
+size = Vector3(3, 3, 2)
+material = SubResource("StandardMaterial3D_ghmcp")
+
 [node name="LaunchPad" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.2, 0)
 use_collision = true
@@ -51,11 +60,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.2, 0)
 use_collision = true
 size = Vector3(2, 0.4, 2)
 material = SubResource("StandardMaterial3D_xjlml")
-script = ExtResource("1_ah44r")
-file_path = "res://scenes/level/level2.tscn"
+script = ExtResource("1_gmskn")
+file_path = "res://scenes/level/level3.tscn"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 3.9, 7.5)
 
-[node name="Player" parent="." instance=ExtResource("1_j32y2")]
+[node name="Player" parent="." instance=ExtResource("2_v5sn8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.4, 0)

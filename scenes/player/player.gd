@@ -9,6 +9,9 @@ var has_crashed: bool = false
 var has_won: bool = false
 var file_path: String = ""
 
+@onready var explosion_audio: AudioStreamPlayer = $ExplosionAudio
+@onready var success_audio: AudioStreamPlayer = $SuccessAudio
+
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("boost"):
 		apply_central_force(basis.y * delta * thrust)
@@ -31,18 +34,20 @@ func crash() -> void:
 	has_crashed = true
 	set_process(false)
 	print('KABOOM!')
-	transition()
+	explosion_audio.play()
+	transition(2.5)
 
 func win(next_level_file: String) -> void:
 	file_path = next_level_file
 	has_won = true
 	set_process(false)
 	print("You win!")
-	transition()
+	success_audio.play()
+	transition(1.5)
 
-func transition() -> void:
+func transition(interval: float) -> void:
 	var tween = create_tween()
-	tween.tween_interval(1.0)
+	tween.tween_interval(interval)
 	if has_won:
 		tween.tween_callback(get_tree().change_scene_to_file.bind(file_path))
 	tween.tween_callback(get_tree().reload_current_scene)

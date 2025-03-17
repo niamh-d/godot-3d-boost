@@ -15,6 +15,8 @@ var file_path: String = ""
 @onready var booster_particles: GPUParticles3D = $BoosterParticles
 @onready var right_booster_particles: GPUParticles3D = $RightBoosterParticles
 @onready var left_booster_particles: GPUParticles3D = $LeftBoosterParticles
+@onready var explosion_particles: GPUParticles3D = $ExplosionParticles
+@onready var success_particles: GPUParticles3D = $SuccessParticles
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("boost"):
@@ -50,6 +52,7 @@ func crash() -> void:
 	has_crashed = true
 	set_process(false)
 	print('KABOOM!')
+	explosion_particles.emitting = true
 	explosion_audio.play()
 	transition(2.5)
 
@@ -58,6 +61,7 @@ func win(next_level_file: String) -> void:
 	has_won = true
 	set_process(false)
 	print("You win!")
+	success_particles.emitting = true
 	success_audio.play()
 	transition(1.5)
 
